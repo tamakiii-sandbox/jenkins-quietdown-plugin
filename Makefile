@@ -1,19 +1,29 @@
-.PHONY: help install build package test clean
+.PHONY: all up down bash clean package test run
 
-help:
-	@cat $(firstword $(MAKEFILE_LIST))
+# Default target
+all: up
 
-install:
-	mvn install
+# Start the development environment
+up:
+	docker-compose up -d
 
-build: \
-	package
+# Stop the development environment
+down:
+	docker-compose down
+
+# Open a shell in the container
+bash:
+	docker-compose exec maven /bin/bash
+
+# Maven targets
+clean:
+	docker-compose exec maven mvn clean
 
 package:
-	mvn package
+	docker-compose exec maven mvn package
 
 test:
-	mvn test
+	docker-compose exec maven mvn test
 
-clean:
-	mvn clean
+run:
+	docker-compose exec maven mvn hpi:run

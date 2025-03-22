@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   maven:
-    image: maven:3.9-eclipse-temurin-21
+    build:
+      context: ./development/docker/maven
+      dockerfile: Dockerfile
     volumes:
       - .:/app
       - maven-repo:/root/.m2
