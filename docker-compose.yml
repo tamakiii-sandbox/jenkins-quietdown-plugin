@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  maven:
+    image: maven:3.9-eclipse-temurin-21
+    volumes:
+      - .:/app
+      - maven-repo:/root/.m2
+    working_dir: /app
+    environment:
+      - MAVEN_CONFIG=/root/.m2
+    command: tail -f /dev/null
+    ports:
+      - "8080:8080"  # For Jenkins when running the plugin
+
+volumes:
+  maven-repo:
