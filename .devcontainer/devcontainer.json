@@ -1,0 +1,42 @@
+{
+	"name": "Jenkins Plugin Development",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "maven",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vscjava.vscode-maven",
+				"vscjava.vscode-java-debug",
+				"vscjava.vscode-java-test",
+				"redhat.vscode-xml",
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": {
+				"java.home": "/opt/java/openjdk",
+				"maven.executable.path": "/usr/share/maven/bin/mvn",
+				"java.configuration.updateBuildConfiguration": "automatic",
+				"java.test.config": {
+					"vmArgs": ["-Xmx512M"]
+				},
+				"java.import.exclusions": [
+					"**/target/**"
+				],
+				"java.compile.nullAnalysis.mode": "automatic",
+				"maven.pomfile.autoUpdateEffectivePOM": true
+			}
+		}
+	},
+	"remoteUser": "root",
+	"forwardPorts": [8080],
+	"postCreateCommand": "mvn -U dependency:resolve && mvn -U dependency:resolve-plugins",
+	"shutdownAction": "stopCompose",
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "false",
+			"installGradle": "false"
+		}
+	}
+}
