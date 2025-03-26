@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  maven:
+    build:
+      context: ./development/docker/maven
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - maven-repo:/root/.m2
+    working_dir: /app
+    environment:
+      - MAVEN_CONFIG=/root/.m2
+    command: tail -f /dev/null
+    ports:
+      - "8080:8080"  # For Jenkins when running the plugin
+
+volumes:
+  maven-repo:

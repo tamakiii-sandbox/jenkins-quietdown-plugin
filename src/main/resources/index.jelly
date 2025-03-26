@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+  A Jenkins plugin for reliable deployment strategy when using quietDown mode, specifically addressing issues with Pipeline jobs.
+</div>
